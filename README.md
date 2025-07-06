@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 DevScribe
 
-## Getting Started
+**AI-powered documentation generator** — instantly create high-quality `README.md` files from your codebase.
 
-First, run the development server:
+## 🚀 Live Demo
+
+👉 [devscribe.vercel.app](https://devscribe-sigma.vercel.app/) (auto-updated)
+
+---
+
+## 📦 Features
+
+- 📂 Upload `.zip` of any codebase
+- 🤖 Automatically generates `README.md` with:
+  - Project description
+  - Installation & usage
+  - Tech stack & features
+  - Contribution & license info
+- 💾 Download the result instantly
+- 🌐 Serverless & blazing-fast (built on Next.js 15 + Vercel)
+
+---
+
+## 🛠️ Tech Stack
+
+- ⚡ **Next.js 15 (App Router + TypeScript)**
+- 🎨 Tailwind CSS for UI
+- 🔐 Vercel serverless functions
+- 🤖 OpenAI GPT-4 for README generation
+
+---
+
+
+## 🧑‍💻 Local Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+git clone https://github.com/ultimateebeast/devscribe.git
+cd devscribe
+pnpm install
+touch .env.local
+# Add your OpenAI key in the file:
+# OPENAI_API_KEY=sk-...
+
 pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
