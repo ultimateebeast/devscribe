@@ -1,4 +1,4 @@
-import { BlobReader, ZipReader, TextWriter, Entry } from "@zip.js/zip.js";
+import { BlobReader, ZipReader, TextWriter} from "@zip.js/zip.js";
 
 export interface ParsedFile {
   path: string;
