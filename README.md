@@ -44,3 +44,9 @@ git clone https://github.com/ultimateebeast/devscribe.git
 cd devscribe
 pnpm install
 touch .env.local
+```
+Add your OpenAI key to .env.local:
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
+
+Then run:
+pnpm dev
