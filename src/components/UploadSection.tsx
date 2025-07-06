@@ -1,11 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import JSZip from "jszip";
 
-export default function UploadSection() {
-  const [readme, setReadme] = useState("");
-  const [loading, setLoading] = useState(false);
+
+// ✅ Accept the onUpload prop from the parent
+type UploadSectionProps = {
+  onUpload: (input: {
+    type: "zip" | "url";
+    data: File | string;
+  }) => Promise<void>;
+};
+
+export default function UploadSection({ onUpload }: UploadSectionProps) {
   const [fileName, setFileName] = useState("");
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,62 +20,17 @@ export default function UploadSection() {
 
     setFileName(file.name);
 
-    const zip = await JSZip.loadAsync(file);
-    let context = "";
-
-    for (const filename of Object.keys(zip.files)) {
-      const zipEntry = zip.files[filename];
-      if (zipEntry.dir) continue;
-      const content = await zipEntry.async("string");
-
-      // Add top files only
-      if (/readme|index|package\.json|main/i.test(filename)) {
-        context += `---\nFILE: ${filename}\n${content.slice(0, 1500)}\n\n`;
-      }
-    }
-
-    // Send to API route
-    await handleGenerate(context);
-  };
-
-  const handleGenerate = async (prompt: string) => {
-    setLoading(true);
-
-    const res = await fetch("/api/generate-readme", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prompt }),
-    });
-
-    const { result } = await res.json();
-    setReadme(result);
-    setLoading(false);
+    // ✅ Send file to parent
+    await onUpload({ type: "zip", data: file });
   };
 
   return (
     <div className="p-4 max-w-xl mx-auto">
       <input type="file" accept=".zip" onChange={handleFileUpload} />
-      {loading ? (
-        <p>Generating README...</p>
-      ) : (
-        readme && (
-          <>
-            <input type="file" accept=".zip" onChange={handleFileUpload} />
-
-            {fileName && (
-              <p className="mt-2 text-sm text-gray-600">
-                📁 Uploaded File: {fileName}
-              </p>
-            )}
-
-            <h2 className="mt-4 font-semibold">📄 Generated README:</h2>
-            <pre className="bg-gray-100 p-4 mt-2 rounded whitespace-pre-wrap">
-              {readme}
-            </pre>
-          </>
-        )
+      {fileName && (
+        <p className="mt-2 text-sm text-gray-600">
+          📁 Uploaded File: {fileName}
+        </p>
       )}
     </div>
   );
