@@ -3,7 +3,6 @@ import { ParsedFile } from "./parseZip";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // ✅ Must be set in `.env.local`
-  dangerouslyAllowBrowser: true, // Only for local/dev
 });
 
 export async function generateReadme(files: ParsedFile[]): Promise<string> {
