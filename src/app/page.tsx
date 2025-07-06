@@ -2,7 +2,7 @@
 import { useState } from "react";
 import UploadSection from "@/components/UploadSection";
 import { parseZipFile, ParsedFile } from "@/utils/parseZip";
-import { generateReadme } from "@/utils/generateReadme";
+// import { generateReadme } from "@/utils/generateReadme";
 import { downloadTextFile } from "@/utils/downloadFile";
 
 export default function HomePage() {
@@ -22,10 +22,22 @@ export default function HomePage() {
 
   const handleGenerate = async () => {
     setLoading(true);
-    const markdown = await generateReadme(files);
-    setReadme(markdown);
+
+    const prompt = `...`; // Construct your prompt from parsed files
+
+    const res = await fetch("/api/generate-readme", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt }),
+    });
+
+    const { result } = await res.json();
+    setReadme(result);
     setLoading(false);
   };
+  
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4 py-10">
