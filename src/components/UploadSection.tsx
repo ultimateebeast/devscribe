@@ -56,6 +56,14 @@ export default function UploadSection() {
       ) : (
         readme && (
           <>
+            <input type="file" accept=".zip" onChange={handleFileUpload} />
+
+            {fileName && (
+              <p className="mt-2 text-sm text-gray-600">
+                📁 Uploaded File: {fileName}
+              </p>
+            )}
+
             <h2 className="mt-4 font-semibold">📄 Generated README:</h2>
             <pre className="bg-gray-100 p-4 mt-2 rounded whitespace-pre-wrap">
               {readme}
